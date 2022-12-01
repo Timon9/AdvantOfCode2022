@@ -41,6 +41,9 @@ func main() {
 
 	input := strings.Split(getInput(), "\n")
 
+	/**
+	Solve the puzzle in O(n)
+	**/
 	c := 0
 	d := 0
 	e := 0
