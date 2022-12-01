@@ -3,12 +3,21 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
+	"os"
+
+	"github.com/joho/godotenv"
 )
 
 func getInput() string {
+	err := godotenv.Load("../.env")
+	if err != nil {
+		log.Fatalf("Some error occured. Err: %s", err)
+	}
+	session := os.Getenv("session")
+
 	url := "https://adventofcode.com/2022/day/1/input"
-	session := "53616c7465645f5f8e63855ae159eac1a344ad8f62990711f5d66329491c39a836d60350a7a51ca9f8a0907b96eb2c83766ad6c93dfafcbc87dbdab4bcb75872"
 
 	req, _ := http.NewRequest("GET", url, nil)
 	req.AddCookie(&http.Cookie{Name: "session", Value: session})
@@ -23,6 +32,9 @@ func getInput() string {
 }
 
 func main() {
+
+	godotenv.Read(".env")
+
 	fmt.Println("Day 1")
 
 	input := getInput()
