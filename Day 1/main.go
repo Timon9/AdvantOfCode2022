@@ -53,7 +53,7 @@ func main() {
 	d := 0 // Second highest sub-count
 	e := 0 // Third highest sub-count
 
-	s := 0
+	s := 0 // Counter per Elv
 	for i := 0; i < len(input); i++ {
 		if input[i] == "" {
 			s = 0
