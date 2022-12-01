@@ -42,6 +42,9 @@ func main() {
 	input := strings.Split(getInput(), "\n")
 
 	c := 0
+	d := 0
+	e := 0
+
 	s := 0
 	for i := 0; i < len(input); i++ {
 		if input[i] == "" {
@@ -51,10 +54,15 @@ func main() {
 			s = s + p
 			if s > c {
 				c = s
+			} else if s > d {
+				d = s
+			} else if s > e {
+				e = s
 			}
+
 		}
 	}
 
-	fmt.Println("Solution is:", c)
+	fmt.Println("Solution is:", (c + d + e))
 
 }
