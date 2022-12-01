@@ -12,6 +12,11 @@ import (
 	"github.com/joho/godotenv"
 )
 
+/**
+Load the input provided by AdventOfCode.
+
+@return string
+**/
 func getInput() string {
 	err := godotenv.Load("../.env")
 	if err != nil {
@@ -39,27 +44,27 @@ func main() {
 
 	fmt.Println("Day 1")
 
-	input := strings.Split(getInput(), "\n")
+	input := strings.Split(getInput(), "\n") // Break the string into an array
 
 	/**
 	Solve the puzzle in O(n)
 	**/
-	c := 0
-	d := 0
-	e := 0
+	c := 0 // Highest sub-count
+	d := 0 // Second highest sub-count
+	e := 0 // Third highest sub-count
 
 	s := 0
 	for i := 0; i < len(input); i++ {
 		if input[i] == "" {
 			s = 0
 		} else {
-			p, _ := strconv.Atoi(input[i])
+			p, _ := strconv.Atoi(input[i]) // Convert string to int
 			s = s + p
-			if s > c {
+			if s > c { // Highest counter
 				c = s
-			} else if s > d {
+			} else if s > d { // Second highest counter
 				d = s
-			} else if s > e {
+			} else if s > e { // Third highest counter
 				e = s
 			}
 
