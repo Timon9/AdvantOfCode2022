@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
+	"strings"
 
 	"github.com/joho/godotenv"
 )
@@ -37,8 +39,22 @@ func main() {
 
 	fmt.Println("Day 1")
 
-	input := getInput()
+	input := strings.Split(getInput(), "\n")
 
-	fmt.Println(input)
+	c := 0
+	s := 0
+	for i := 0; i < len(input); i++ {
+		if input[i] == "" {
+			s = 0
+		} else {
+			p, _ := strconv.Atoi(input[i])
+			s = s + p
+			if s > c {
+				c = s
+			}
+		}
+	}
+
+	fmt.Println("Solution is:", c)
 
 }
