@@ -56,7 +56,7 @@ func main() {
 	s := 0 // Counter per Elv
 	for i := 0; i < len(input); i++ {
 		if input[i] == "" {
-			s = 0
+			s = 0 // Reset the counter, an empty line indicates a new Elv
 		} else {
 			p, _ := strconv.Atoi(input[i]) // Convert string to int
 			s = s + p
