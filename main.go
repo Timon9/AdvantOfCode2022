@@ -17,14 +17,14 @@ Load the input provided by AdventOfCode.
 @return string
 *
 */
-func GetInput() string {
+func GetInput(day int) string {
 	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatalf("Some error occured. Err: %s", err)
 	}
 	session := os.Getenv("session")
 
-	url := "https://adventofcode.com/2022/day/2/input"
+	url := fmt.Sprintf("https://adventofcode.com/2022/day/%d/input", day)
 
 	req, _ := http.NewRequest("GET", url, nil)
 	req.AddCookie(&http.Cookie{Name: "session", Value: session})
@@ -44,6 +44,6 @@ func main() {
 
 	fmt.Println("AdvantOfCode")
 
-	day1()
+	day2()
 
 }

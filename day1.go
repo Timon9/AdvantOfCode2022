@@ -14,7 +14,7 @@ func day1() {
 
 	fmt.Println("Day 1")
 
-	input := strings.Split(GetInput(), "\n") // Break the string into an array
+	input := strings.Split(GetInput(1), "\n") // Break the string into an array
 
 	/**
 	Solve the puzzle in O(n)

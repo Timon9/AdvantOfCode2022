@@ -12,6 +12,6 @@ func day2() {
 
 	fmt.Println("Day 2")
 
-	fmt.Println(GetInput())
+	fmt.Println(GetInput(2))
 
 }
