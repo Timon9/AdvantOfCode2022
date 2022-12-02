@@ -7,7 +7,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func part1(input []string) int {
+func day2Part1(input []string) int {
 
 	c := 0
 	for i := 0; i < len(input); i++ {
@@ -60,7 +60,7 @@ func part1(input []string) int {
 	return c
 }
 
-func part2(input []string) int {
+func day2Part2(input []string) int {
 
 	c := 0
 
@@ -112,7 +112,7 @@ func day2() {
 
 	input := strings.Split(GetInput(2), "\n") // Break the string into an array
 
-	fmt.Println("Part 1 solution is:", part1(input))
-	fmt.Println("Part 2 solution is:", part2(input))
+	fmt.Println("Part 1 solution is:", day2Part1(input))
+	fmt.Println("Part 2 solution is:", day2Part2(input))
 
 }
