@@ -7,17 +7,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func day2() {
-
-	godotenv.Read(".env")
-
-	fmt.Println("Day 2")
-
-	input := strings.Split(GetInput(2), "\n") // Break the string into an array
-
-	/**
-	Solve the puzzle in O(n)
-	**/
+func part1(input []string) int {
 
 	c := 0
 	for i := 0; i < len(input); i++ {
@@ -67,7 +57,16 @@ func day2() {
 		}
 
 	}
+	return c
+}
+func day2() {
 
-	fmt.Println("Solution is:", c)
+	godotenv.Read(".env")
+
+	fmt.Println("Day 2")
+
+	input := strings.Split(GetInput(2), "\n") // Break the string into an array
+
+	fmt.Println("Solution is:", part1(input))
 
 }
