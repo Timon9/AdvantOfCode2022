@@ -2,49 +2,19 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-	"log"
-	"net/http"
-	"os"
 	"strconv"
 	"strings"
 
 	"github.com/joho/godotenv"
 )
 
-/**
-Load the input provided by AdventOfCode.
-
-@return string
-**/
-func getInput() string {
-	err := godotenv.Load("../.env")
-	if err != nil {
-		log.Fatalf("Some error occured. Err: %s", err)
-	}
-	session := os.Getenv("session")
-
-	url := "https://adventofcode.com/2022/day/1/input"
-
-	req, _ := http.NewRequest("GET", url, nil)
-	req.AddCookie(&http.Cookie{Name: "session", Value: session})
-
-	res, _ := http.DefaultClient.Do(req)
-
-	defer res.Body.Close()
-
-	body, _ := ioutil.ReadAll(res.Body)
-
-	return string(body)
-}
-
-func main() {
+func day1() {
 
 	godotenv.Read(".env")
 
 	fmt.Println("Day 1")
 
-	input := strings.Split(getInput(), "\n") // Break the string into an array
+	input := strings.Split(GetInput(), "\n") // Break the string into an array
 
 	/**
 	Solve the puzzle in O(n)
