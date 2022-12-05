@@ -40,54 +40,29 @@ func display(matrix map[int][]string) {
 
 }
 
-func day5Part1(input []string) {
-
-	matrix := make(map[int][]string)
+func buildMatrix(input []string, matrix map[int][]string) map[int][]string {
 
 	// Fill the matrix
 	for i := 1; i < len(input) && i <= 8; i++ {
 		line := input[8-i]
-		crate1 := line[1:2]
-		crate2 := line[5:6]
-		crate3 := line[9:10]
-		crate4 := line[13:14]
-		crate5 := line[17:18]
-
-		crate6 := line[21:22]
-		crate7 := line[25:26]
-		crate8 := line[29:30]
-		crate9 := line[33:34]
-
-		if crate1 != " " {
-			matrix[1] = append(matrix[1], crate1)
-		}
-		if crate2 != " " {
-			matrix[2] = append(matrix[2], crate2)
-		}
-
-		if crate3 != " " {
-			matrix[3] = append(matrix[3], crate3)
-		}
-		if crate4 != " " {
-			matrix[4] = append(matrix[4], crate4)
-		}
-		if crate5 != " " {
-			matrix[5] = append(matrix[5], crate5)
-		}
-		if crate6 != " " {
-			matrix[6] = append(matrix[6], crate6)
-		}
-		if crate7 != " " {
-			matrix[7] = append(matrix[7], crate7)
-		}
-		if crate8 != " " {
-			matrix[8] = append(matrix[8], crate8)
-		}
-		if crate9 != " " {
-			matrix[9] = append(matrix[9], crate9)
+		j := 1
+		for c := 1; c <= 9; c++ {
+			crate := line[j:(j + 1)]
+			if crate != " " {
+				fmt.Println("Building crate", i, crate)
+				matrix[c] = append(matrix[c], crate)
+			}
+			j = j + 4
 		}
 
 	}
+	return matrix
+}
+
+func day5Part1(input []string) {
+
+	matrix := make(map[int][]string)
+	buildMatrix(input, matrix)
 	display(matrix)
 	fmt.Println("=====---------====")
 	for i := 10; i < len(input) && len(input[i]) > 4; i++ {
@@ -99,13 +74,10 @@ func day5Part1(input []string) {
 			from, _ := strconv.Atoi(strings.Split(f[1], " ")[0])
 			t := strings.Split(input[i], "to ")
 			to, _ := strconv.Atoi(t[1])
-			// fmt.Println(nr, "x ", from, "=>", to)
 			for ii := 1; ii <= nr; ii++ {
 				matrix = move(matrix, from, to)
 			}
 		}
-		// display(matrix)
-		// fmt.Println("====")
 
 	}
 	fmt.Println("=====---------====")
@@ -116,51 +88,8 @@ func day5Part1(input []string) {
 func day5Part2(input []string) {
 
 	matrix := make(map[int][]string)
+	buildMatrix(input, matrix)
 
-	// Fill the matrix
-	for i := 1; i < len(input) && i <= 8; i++ {
-		line := input[8-i]
-		crate1 := line[1:2]
-		crate2 := line[5:6]
-		crate3 := line[9:10]
-		crate4 := line[13:14]
-		crate5 := line[17:18]
-
-		crate6 := line[21:22]
-		crate7 := line[25:26]
-		crate8 := line[29:30]
-		crate9 := line[33:34]
-
-		if crate1 != " " {
-			matrix[1] = append(matrix[1], crate1)
-		}
-		if crate2 != " " {
-			matrix[2] = append(matrix[2], crate2)
-		}
-
-		if crate3 != " " {
-			matrix[3] = append(matrix[3], crate3)
-		}
-		if crate4 != " " {
-			matrix[4] = append(matrix[4], crate4)
-		}
-		if crate5 != " " {
-			matrix[5] = append(matrix[5], crate5)
-		}
-		if crate6 != " " {
-			matrix[6] = append(matrix[6], crate6)
-		}
-		if crate7 != " " {
-			matrix[7] = append(matrix[7], crate7)
-		}
-		if crate8 != " " {
-			matrix[8] = append(matrix[8], crate8)
-		}
-		if crate9 != " " {
-			matrix[9] = append(matrix[9], crate9)
-		}
-
-	}
 	display(matrix)
 	fmt.Println("=====---------====")
 	for i := 10; i < len(input) && len(input[i]) > 4; i++ {
@@ -172,9 +101,7 @@ func day5Part2(input []string) {
 			from, _ := strconv.Atoi(strings.Split(f[1], " ")[0])
 			t := strings.Split(input[i], "to ")
 			to, _ := strconv.Atoi(t[1])
-			// fmt.Println(nr, "x ", from, "=>", to)
 			matrix = moveV2(matrix, from, to, nr)
-
 		}
 
 	}
