@@ -63,7 +63,6 @@ func day5Part1(input []string) {
 	matrix := make(map[int][]string)
 	buildMatrix(input, matrix)
 	display(matrix)
-	fmt.Println("=====---------====")
 	for i := 10; i < len(input) && len(input[i]) > 4; i++ {
 		if input[i][0:4] == "move" {
 
@@ -79,7 +78,6 @@ func day5Part1(input []string) {
 		}
 
 	}
-	fmt.Println("=====---------====")
 
 	display(matrix)
 }
