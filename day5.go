@@ -64,12 +64,15 @@ func day5Part1(input []string) int {
 		if len(input[i]) < 4 {
 			continue
 		}
-		fmt.Println(input[i])
 
 		if input[i][0:4] == "move" {
 			l := strings.Split(input[i], "move ")
 			nr := strings.Split(l[1], " ")[0]
-			fmt.Println(nr)
+			f := strings.Split(input[i], "from ")
+			from := strings.Split(f[1], " ")[0]
+			t := strings.Split(input[i], "to ")
+			to := t[1]
+			fmt.Println(nr, "x ", from, "=>", to)
 
 		}
 
