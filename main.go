@@ -44,6 +44,6 @@ func main() {
 
 	fmt.Println("AdvantOfCode")
 
-	day4()
+	day5()
 
 }
