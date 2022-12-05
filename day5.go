@@ -2,18 +2,39 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/joho/godotenv"
 )
 
-func day5Part1(input []string) int {
-	r := 0
+func move(matrix map[int][]string, from int, to int) map[int][]string {
+
+	l := len(matrix[from]) - 1
+
+	if l < 0 {
+		return matrix
+	}
+	f := matrix[from][l]
+	//fmt.Println("--Moving '", f, "'")
+	matrix[from] = matrix[from][0:l]
+	matrix[to] = append(matrix[to], f)
+	return matrix
+}
+
+func display(matrix map[int][]string) {
+	for i := 1; i <= 9; i++ {
+		fmt.Println(i, matrix[i])
+	}
+
+}
+
+func day5Part1(input []string) {
 
 	matrix := make(map[int][]string)
 
 	// Fill the matrix
-	for i := 1; i < len(input) && i < 8; i++ {
+	for i := 1; i < len(input) && i <= 8; i++ {
 		line := input[8-i]
 		crate1 := line[1:2]
 		crate2 := line[5:6]
@@ -55,32 +76,30 @@ func day5Part1(input []string) int {
 			matrix[9] = append(matrix[9], crate9)
 		}
 
-		fmt.Println(line)
-
 	}
-	fmt.Println(matrix)
+	display(matrix)
+	fmt.Println("=====---------====")
+	for i := 10; i < len(input) && len(input[i]) > 4; i++ {
+		if input[i][0:4] == "move" {
 
-	for i := 8; i < len(input); i++ {
-		if len(input[i]) < 4 {
-			continue
+			l := strings.Split(input[i], "move ")
+			nr, _ := strconv.Atoi(strings.Split(l[1], " ")[0])
+			f := strings.Split(input[i], "from ")
+			from, _ := strconv.Atoi(strings.Split(f[1], " ")[0])
+			t := strings.Split(input[i], "to ")
+			to, _ := strconv.Atoi(t[1])
+			// fmt.Println(nr, "x ", from, "=>", to)
+			for ii := 1; ii <= nr; ii++ {
+				matrix = move(matrix, from, to)
+			}
 		}
+		// display(matrix)
+		// fmt.Println("====")
 
-		// if input[i][0:4] == "move" {
-		// 	l := strings.Split(input[i], "move ")
-		// 	nr := strings.Split(l[1], " ")[0]
-		// 	f := strings.Split(input[i], "from ")
-		// 	from := strings.Split(f[1], " ")[0]
-		// 	t := strings.Split(input[i], "to ")
-		// 	to := t[1]
-		// 	fmt.Println(nr, "x ", from, "=>", to)
-		// }
 	}
+	fmt.Println("=====---------====")
 
-	//Move 1x 1=>2
-	fmt.Println(matrix[1])
-	fmt.Println(matrix[2])
-
-	return r
+	display(matrix)
 }
 
 func day5Part2(input []string) int {
@@ -99,7 +118,6 @@ func day5() {
 	fmt.Println("Day 5")
 
 	input := strings.Split(GetInput(5), "\n") // Break the string into an array
-	fmt.Println("Part 1 solution is:", day5Part1(input))
-	// fmt.Println("Part 2 solution is:", day5Part2(input))
+	day5Part1(input)
 
 }
