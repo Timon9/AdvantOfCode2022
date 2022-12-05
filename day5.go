@@ -65,18 +65,20 @@ func day5Part1(input []string) int {
 			continue
 		}
 
-		if input[i][0:4] == "move" {
-			l := strings.Split(input[i], "move ")
-			nr := strings.Split(l[1], " ")[0]
-			f := strings.Split(input[i], "from ")
-			from := strings.Split(f[1], " ")[0]
-			t := strings.Split(input[i], "to ")
-			to := t[1]
-			fmt.Println(nr, "x ", from, "=>", to)
-
-		}
-
+		// if input[i][0:4] == "move" {
+		// 	l := strings.Split(input[i], "move ")
+		// 	nr := strings.Split(l[1], " ")[0]
+		// 	f := strings.Split(input[i], "from ")
+		// 	from := strings.Split(f[1], " ")[0]
+		// 	t := strings.Split(input[i], "to ")
+		// 	to := t[1]
+		// 	fmt.Println(nr, "x ", from, "=>", to)
+		// }
 	}
+
+	//Move 1x 1=>2
+	fmt.Println(matrix[1])
+	fmt.Println(matrix[2])
 
 	return r
 }
