@@ -58,23 +58,27 @@ func buildMatrix(input []string, matrix map[int][]string) map[int][]string {
 	return matrix
 }
 
+func decodeToFrom(input string) (int, int, int) {
+
+	l := strings.Split(input, "move ")
+	nr, _ := strconv.Atoi(strings.Split(l[1], " ")[0])
+	f := strings.Split(input, "from ")
+	from, _ := strconv.Atoi(strings.Split(f[1], " ")[0])
+	t := strings.Split(input, "to ")
+	to, _ := strconv.Atoi(t[1])
+
+	return nr, from, to
+}
+
 func day5Part1(input []string) {
 
 	matrix := make(map[int][]string)
 	buildMatrix(input, matrix)
 	display(matrix)
 	for i := 10; i < len(input) && len(input[i]) > 4; i++ {
-		if input[i][0:4] == "move" {
-
-			l := strings.Split(input[i], "move ")
-			nr, _ := strconv.Atoi(strings.Split(l[1], " ")[0])
-			f := strings.Split(input[i], "from ")
-			from, _ := strconv.Atoi(strings.Split(f[1], " ")[0])
-			t := strings.Split(input[i], "to ")
-			to, _ := strconv.Atoi(t[1])
-			for ii := 1; ii <= nr; ii++ {
-				matrix = move(matrix, from, to)
-			}
+		nr, from, to := decodeToFrom(input[i])
+		for ii := 1; ii <= nr; ii++ {
+			matrix = move(matrix, from, to)
 		}
 
 	}
@@ -88,16 +92,8 @@ func day5Part2(input []string) {
 	buildMatrix(input, matrix)
 
 	for i := 10; i < len(input) && len(input[i]) > 4; i++ {
-		if input[i][0:4] == "move" {
-
-			l := strings.Split(input[i], "move ")
-			nr, _ := strconv.Atoi(strings.Split(l[1], " ")[0])
-			f := strings.Split(input[i], "from ")
-			from, _ := strconv.Atoi(strings.Split(f[1], " ")[0])
-			t := strings.Split(input[i], "to ")
-			to, _ := strconv.Atoi(t[1])
-			matrix = moveV2(matrix, from, to, nr)
-		}
+		nr, from, to := decodeToFrom(input[i])
+		matrix = moveV2(matrix, from, to, nr)
 
 	}
 
