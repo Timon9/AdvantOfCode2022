@@ -86,7 +86,7 @@ func day5Part1(input []string) {
 	display(matrix)
 }
 
-func day5Part2(input []string) {
+func day5Part2(input []string) map[int][]string {
 
 	matrix := make(map[int][]string)
 	buildMatrix(input, matrix)
@@ -98,6 +98,7 @@ func day5Part2(input []string) {
 	}
 
 	display(matrix)
+	return matrix
 }
 
 func day5() {
