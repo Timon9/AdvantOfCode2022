@@ -60,6 +60,21 @@ func day5Part1(input []string) int {
 	}
 	fmt.Println(matrix)
 
+	for i := 8; i < len(input); i++ {
+		if len(input[i]) < 4 {
+			continue
+		}
+		fmt.Println(input[i])
+
+		if input[i][0:4] == "move" {
+			l := strings.Split(input[i], "move ")
+			nr := strings.Split(l[1], " ")[0]
+			fmt.Println(nr)
+
+		}
+
+	}
+
 	return r
 }
 
