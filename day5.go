@@ -49,7 +49,6 @@ func buildMatrix(input []string, matrix map[int][]string) map[int][]string {
 		for c := 1; c <= 9; c++ {
 			crate := line[j:(j + 1)]
 			if crate != " " {
-				fmt.Println("Building crate", i, crate)
 				matrix[c] = append(matrix[c], crate)
 			}
 			j = j + 4
