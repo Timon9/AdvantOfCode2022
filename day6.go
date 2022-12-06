@@ -6,24 +6,25 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func detectMarker(input string) int {
+func detectMarker(input string, distinct int) int {
 	count := len(input)
-	u := 0
-	hm := make(map[byte]bool) // hashmap
-	for i := 0; i < count; i++ {
-		v := input[i]
-		if _, ok := hm[v]; ok { // Duplicate
-			for k := range hm { // Clear hash map
-				delete(hm, k)
-			}
-			u = 0
-			continue
+	hm := make(map[int]map[byte]bool) // hashmap
+	for i := distinct; i < count; i++ {
+		hm[i] = make(map[byte]bool)
+		s := i - distinct
+		if s < 0 {
+			s = 0
 		}
+		v := input[s:i]
+		for ii := 0; ii < len(v); ii++ {
+			vv := v[ii]
+			if _, ok := hm[i][vv]; !ok { // Unique
+				hm[i][vv] = true
+				if len(hm[i]) >= distinct {
+					return i
+				}
+			}
 
-		hm[v] = true
-		u++
-		if u == 4 {
-			return i - 2
 		}
 
 	}
@@ -31,7 +32,10 @@ func detectMarker(input string) int {
 }
 
 func day6Part1(input string) {
-	fmt.Println(detectMarker(input))
+	fmt.Println("Day6Part1", detectMarker(input, 4))
+}
+func day6Part2(input string) {
+	fmt.Println("Day6Part2", detectMarker(input, 14))
 }
 
 func day6() {
@@ -40,6 +44,8 @@ func day6() {
 
 	fmt.Println("Day 6")
 
-	day6Part1(GetInput(6))
+	input := GetInput(6)
+	day6Part1(input)
+	day6Part2(input)
 
 }
