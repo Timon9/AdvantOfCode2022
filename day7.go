@@ -12,30 +12,27 @@ func findTotalSizeOfLargeDirectories(input string) int {
 
 	lines := strings.Split(input, "\n")
 	cm := make(map[string]int)
-	rm := []string{"/"}
+	rm := []string{}
 
 	dl := false
 
+	ttmp := 0
 	for i := 0; i < len(lines); i++ {
 		line := lines[i]
 		ll := len(line)
-		fmt.Println("==")
 
 		if ll > 1 && line[0:1] == "$" {
 			dl = false
 		}
 
 		if ll > 5 && line[0:5] == "$ cd " {
-			nextDir := line[5:ll]
-			switch nextDir {
-			case "/":
+			ttmp++
+			switch line[5:ll] {
 			case "..":
-				fmt.Println("Switching")
-				fmt.Println(rm)
 				rm = rm[0 : len(rm)-1]
-				fmt.Println(rm)
 				continue
 			default:
+				nextDir := fmt.Sprintf("lv_%d_%v", ttmp, line[5:ll])
 				rm = append(rm, nextDir)
 			}
 		}
@@ -56,8 +53,8 @@ func findTotalSizeOfLargeDirectories(input string) int {
 
 	r := 0
 
-	// fmt.Println(cm)
 	for k := range cm {
+		fmt.Println(k, cm[k])
 		if cm[k] < 100000 {
 			r = r + cm[k]
 		}
@@ -67,7 +64,6 @@ func findTotalSizeOfLargeDirectories(input string) int {
 }
 
 func day7Part1(input string) {
-	//1104798<
 	fmt.Println("Result", findTotalSizeOfLargeDirectories(input))
 }
 
