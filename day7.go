@@ -7,10 +7,11 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func findTotalSize(input string) int {
+func findTotalSizeOfLargeDirectories(input string) int {
 
 	lines := strings.Split(input, "\n")
-	// cm := make(map[string]int) // Hashmap [dir] size
+	cm := make(map[string]int) // Hashmap [size] dir
+	current := "/"
 
 	for i := 0; i < len(lines); i++ {
 		line := lines[i]
@@ -18,9 +19,24 @@ func findTotalSize(input string) int {
 
 		if ll > 5 && line[0:5] == "$ cd " {
 			nextDir := line[5:ll]
-			fmt.Println("Chaging to", nextDir)
+			switch nextDir {
+			case "/":
+			case "..":
+			case "...":
+				continue
+			default:
+				current = nextDir
+				cm[current] = 1
+			}
 		}
+
+		if ll > 3 && line[0:4] == "$ ls" {
+			fmt.Println("...Listing for ", current)
+		}
+
 	}
+
+	fmt.Println(cm)
 	return 0
 }
 

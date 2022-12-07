@@ -30,7 +30,7 @@ $ ls
 5626152 d.ext
 7214296 k`
 
-	totalSize := findTotalSize(testData)
+	totalSize := findTotalSizeOfLargeDirectories(testData)
 
 	if totalSize != 95437 {
 		t.Fatalf("Expected 95437, but got %d", totalSize)
