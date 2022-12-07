@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/joho/godotenv"
@@ -10,38 +11,64 @@ import (
 func findTotalSizeOfLargeDirectories(input string) int {
 
 	lines := strings.Split(input, "\n")
-	cm := make(map[string]int) // Hashmap [size] dir
-	current := "/"
+	cm := make(map[string]int)
+	rm := []string{"/"}
+
+	dl := false
 
 	for i := 0; i < len(lines); i++ {
 		line := lines[i]
 		ll := len(line)
+		fmt.Println("==")
+
+		if ll > 1 && line[0:1] == "$" {
+			dl = false
+		}
 
 		if ll > 5 && line[0:5] == "$ cd " {
 			nextDir := line[5:ll]
 			switch nextDir {
 			case "/":
 			case "..":
-			case "...":
+				fmt.Println("Switching")
+				fmt.Println(rm)
+				rm = rm[0 : len(rm)-1]
+				fmt.Println(rm)
 				continue
 			default:
-				current = nextDir
-				cm[current] = 1
+				rm = append(rm, nextDir)
+			}
+		}
+
+		if dl == true && len(line) > 3 && line[0:3] != "dir" {
+			tmp := strings.Split(line, " ")
+			size, _ := strconv.Atoi(tmp[0])
+			for ii := 0; ii < len(rm); ii++ {
+				cm[rm[ii]] = cm[rm[ii]] + size
 			}
 		}
 
 		if ll > 3 && line[0:4] == "$ ls" {
-			fmt.Println("...Listing for ", current)
+			dl = true
 		}
 
 	}
 
-	fmt.Println(cm)
-	return 0
+	r := 0
+
+	// fmt.Println(cm)
+	for k := range cm {
+		if cm[k] < 100000 {
+			r = r + cm[k]
+		}
+	}
+
+	return r
 }
 
 func day7Part1(input string) {
-	fmt.Println("Day7Part1")
+	//1104798<
+	fmt.Println("Result", findTotalSizeOfLargeDirectories(input))
 }
 
 func day7() {
