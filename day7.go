@@ -14,9 +14,11 @@ func findTotalSize(input string) int {
 
 	for i := 0; i < len(lines); i++ {
 		line := lines[i]
+		ll := len(line)
 
-		if len(line) > 5 && line[0:5] == "$ cd " {
-			fmt.Println("Chaging to...")
+		if ll > 5 && line[0:5] == "$ cd " {
+			nextDir := line[5:ll]
+			fmt.Println("Chaging to", nextDir)
 		}
 	}
 	return 0
