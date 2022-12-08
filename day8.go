@@ -38,7 +38,6 @@ func rl(input []string, hm map[string]bool) (int, map[string]bool) {
 		l := input[x][len(input[x])-1]
 		for y := len(input[x]) - 2; y > 0; y-- {
 			k := fmt.Sprintf("x%vy%v", x, y)
-			fmt.Println(k)
 			if input[x][y] > l {
 				l = input[x][y]
 				if _, ok := hm[k]; !ok {
@@ -105,22 +104,19 @@ func findVisibleTrees(input string) int {
 	for a := 0; a < len(lines); a++ {
 		lines[a] = strings.TrimSpace(lines[a])
 	}
+
 	hm := make(map[string]bool)
 	c := len(lines)
-	a := 0
-	for i := 0; i < len(lines[0]); i++ {
-		a++
-	}
-
-	out := c + (a - 1) + (a - 1) + (c - 2)
+	out := ((c * 2) + (len(lines[0]) * 2)) - 4
 
 	r = out
 	x, y := lr(lines, hm)
 	xx, yy := tb(lines, y)
 	xxx, yyy := rl(lines, yy)
-	xxxx, _ := bt(lines, yyy)
+	xxxx, yyyy := bt(lines, yyy)
 	r = r + x + xx + xxx + xxxx
 
+	fmt.Println(yyyy)
 	return r
 }
 
