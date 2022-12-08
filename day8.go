@@ -7,6 +7,31 @@ import (
 	"github.com/joho/godotenv"
 )
 
+func lr(input []string) (int, []string) {
+	r := 0
+	for i := 1; i < len(input)-1; i++ {
+		v := input[i]
+		l := v[0]
+		fmt.Println("")
+		fmt.Printf("%v|", string(l))
+		for ii := 0; ii < len(v)-1; ii++ {
+			if v[ii] > l {
+				l = v[ii]
+				r++
+				fmt.Printf("[%v]", string(v[ii]))
+				input[i] = input[i][0:ii] + "0" + input[i][ii+1:len(input[i])]
+
+			} else {
+				fmt.Printf("%v.", string(v[ii]))
+			}
+
+		}
+
+	}
+	fmt.Println("Found", r, "int. trees lr")
+	return r, input
+}
+
 func findVisibleTrees(input string) int {
 	r := 0
 	lines := strings.Split(input, "\n")
@@ -18,13 +43,10 @@ func findVisibleTrees(input string) int {
 
 	out := c + (a - 1) + (a - 1) + (c - 2)
 
-	for i := 1; i < len(lines)-1; i++ {
-		for ii := 1; ii < len(lines[i])-1; ii++ {
-			fmt.Printf("%v,", string(lines[i][ii]))
-		}
-
-	}
 	r = out
+	x, y := lr(lines)
+	r = r + x
+	lr(y)
 	return r
 }
 
