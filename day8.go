@@ -125,11 +125,12 @@ func findVisibleTrees(input string) int {
 }
 
 func findUp(lines []string, x int, y int) int {
-	s := lines[x][y]
-	c := 1
-	for i := x - 1; i > 0; i-- {
+	s, _ := strconv.Atoi(string(lines[x][y]))
+	c := 0
+	for i := x - 1; i >= 0; i-- {
 		c++
-		if lines[i][y] >= s {
+		b, _ := strconv.Atoi(string(lines[i][y]))
+		if b >= s {
 			return c
 		}
 
@@ -138,24 +139,27 @@ func findUp(lines []string, x int, y int) int {
 }
 
 func findDown(lines []string, x int, y int) int {
-	s := lines[x][y]
-	c := 1
+	s, _ := strconv.Atoi(string(lines[x][y]))
+	c := 0
 	for i := x + 1; i < len(lines); i++ {
 		c++
-		if lines[i][y] > s {
+		b, _ := strconv.Atoi(string(lines[i][y]))
+		if b >= s {
 			return c
 		}
 
 	}
-	return 0
+	return c
 }
 
 func findLeft(lines []string, x int, y int) int {
-	s := lines[x][y]
-	c := 1
-	for ii := y - 1; ii > 0; ii-- {
+	s, _ := strconv.Atoi(string(lines[x][y]))
+	c := 0
+	for ii := y - 1; ii >= 0; ii-- {
 		c++
-		if lines[x][ii] > s {
+		b, _ := strconv.Atoi(string(lines[x][ii]))
+
+		if b >= s {
 			return c
 		}
 
@@ -164,11 +168,13 @@ func findLeft(lines []string, x int, y int) int {
 }
 
 func findRight(lines []string, x int, y int) int {
-	s := lines[x][y]
-	c := 1
-	for ii := y + 1; ii < len(lines[x])-1; ii++ {
+	s, _ := strconv.Atoi(string(lines[x][y]))
+	c := 0
+	for ii := y + 1; ii < len(lines[x]); ii++ {
 		c++
-		if lines[x][ii] > s {
+		b, _ := strconv.Atoi(string(lines[x][ii]))
+
+		if b >= s {
 			return c
 		}
 
@@ -182,24 +188,25 @@ func findBestTree(input string) int {
 	lines := strings.Split(input, "\n")
 	for a := 0; a < len(lines); a++ {
 		lines[a] = strings.TrimSpace(lines[a])
-		if len(lines[a]) < 10 {
+		if len(lines[a]) < 1 {
 			lines = removeIndex(lines, a)
 		}
 	}
 
-	for x := 1; x < len(lines)-1; x++ {
-		for y := 1; y < len(lines[x])-1; y++ {
+	for x := 0; x < len(lines); x++ {
+		for y := 0; y < len(lines[x]); y++ {
 			up := findUp(lines, x, y)
 			down := findDown(lines, x, y)
 			left := findLeft(lines, x, y)
 			right := findRight(lines, x, y)
 
-			// fmt.Printf("%v|", up)
+			fmt.Printf("%v|", right)
 			tree := up * left * down * right
 			if tree > r {
 				r = tree
 			}
 		}
+
 	}
 
 	return r
@@ -210,7 +217,7 @@ func day8Part1(input string) {
 }
 
 func day8Part2(input string) {
-	//1494080
+	//136740< 1494080 >
 	fmt.Println("Result part2", findBestTree(input))
 }
 
