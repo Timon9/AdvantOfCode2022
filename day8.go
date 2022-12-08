@@ -129,7 +129,6 @@ func findVisibleTrees(input string) int {
 }
 
 func day8Part1(input string) {
-	//<1773 1700>
 	fmt.Println("Result part 1", findVisibleTrees(input))
 }
 
