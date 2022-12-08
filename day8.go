@@ -6,8 +6,12 @@ import (
 	"github.com/joho/godotenv"
 )
 
+func findVisibleTrees(input string) int {
+	return 0
+}
+
 func day8Part1(input string) {
-	fmt.Println("Result part 1")
+	fmt.Println("Result part 1", findVisibleTrees(input))
 }
 
 func day8() {
