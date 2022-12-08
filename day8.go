@@ -11,8 +11,6 @@ func lr(input []string, hm map[string]bool) (int, map[string]bool) {
 	r := 0
 	for x := 1; x < len(input)-1; x++ {
 		l := input[x][0]
-		// fmt.Println("")
-		// fmt.Printf("%v|", string(l))
 		for y := 0; y < len(input[x])-1; y++ {
 			k := fmt.Sprintf("x%vy%v", x, y)
 			if input[x][y] > l {
@@ -34,11 +32,13 @@ func lr(input []string, hm map[string]bool) (int, map[string]bool) {
 func rl(input []string, hm map[string]bool) (int, map[string]bool) {
 	r := 0
 	for x := 1; x < len(input)-1; x++ {
-		l := input[x][0]
-		// fmt.Println("")
-		// fmt.Printf("%v|", string(l))
-		for y := len(input[x]) - 1; y > 0; y-- {
+		if len(input[x]) <= 1 {
+			continue
+		}
+		l := input[x][len(input[x])-1]
+		for y := len(input[x]) - 2; y > 0; y-- {
 			k := fmt.Sprintf("x%vy%v", x, y)
+			fmt.Println(k)
 			if input[x][y] > l {
 				l = input[x][y]
 				if _, ok := hm[k]; !ok {
@@ -57,32 +57,19 @@ func rl(input []string, hm map[string]bool) (int, map[string]bool) {
 
 func tb(input []string, hm map[string]bool) (int, map[string]bool) {
 	r := 0
-	for y := 1; y < len(input[0]); y++ {
+	for y := 1; y < len(input[0])-1; y++ {
 		l := input[0][y]
-		// fmt.Printf("%v|", string(l))
-
 		for x := 1; x < len(input)-1; x++ {
 			v := input[x][y]
-			k := fmt.Sprintf("x%vy%v", y, x)
+			k := fmt.Sprintf("x%vy%v", x, y)
 			if v > l {
-				// fmt.Printf("[%v]", string(v))
-
 				l = v
 				if _, ok := hm[k]; !ok {
 					r++
 					hm[k] = true
-					// fmt.Printf("[Y]")
 				}
-				// else {
-				// 	// fmt.Printf("[D]")
-
-				// }
-			} else {
-				// fmt.Printf("%v", string(v))
-
 			}
 		}
-		// fmt.Println("\n===")
 
 	}
 	fmt.Println("TB| Found", r, "int. trees ")
@@ -91,32 +78,21 @@ func tb(input []string, hm map[string]bool) (int, map[string]bool) {
 
 func bt(input []string, hm map[string]bool) (int, map[string]bool) {
 	r := 0
-	for y := 1; y < len(input[0]); y++ {
-		l := input[0][y]
-		// fmt.Printf("%v|", string(l))
+	for y := 1; y < len(input[0])-1; y++ {
+		l := input[len(input[0])-1][y]
 
-		for x := len(input) - 1; x > 1; x-- {
+		for x := len(input) - 2; x > 1; x-- {
 			v := input[x][y]
-			k := fmt.Sprintf("x%vy%v", y, x)
+			k := fmt.Sprintf("x%vy%v", x, y)
 			if v > l {
-				// fmt.Printf("[%v]", string(v))
 
 				l = v
 				if _, ok := hm[k]; !ok {
 					r++
 					hm[k] = true
-					// fmt.Printf("[Y]")
 				}
-				// else {
-				// 	// fmt.Printf("[D]")
-
-				// }
-			} else {
-				// fmt.Printf("%v", string(v))
-
 			}
 		}
-		// fmt.Println("\n===")
 
 	}
 	fmt.Println("BT| Found", r, "int. trees ")
@@ -126,6 +102,9 @@ func bt(input []string, hm map[string]bool) (int, map[string]bool) {
 func findVisibleTrees(input string) int {
 	r := 0
 	lines := strings.Split(input, "\n")
+	for a := 0; a < len(lines); a++ {
+		lines[a] = strings.TrimSpace(lines[a])
+	}
 	hm := make(map[string]bool)
 	c := len(lines)
 	a := 0
@@ -146,6 +125,7 @@ func findVisibleTrees(input string) int {
 }
 
 func day8Part1(input string) {
+	//<1773
 	fmt.Println("Result part 1", findVisibleTrees(input))
 }
 
