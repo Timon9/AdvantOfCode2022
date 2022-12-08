@@ -109,19 +109,18 @@ func findVisibleTrees(input string) int {
 	c := len(lines)
 	out := ((c * 2) + (len(lines[0]) * 2)) - 4
 
-	r = out
 	x, y := lr(lines, hm)
 	xx, yy := tb(lines, y)
 	xxx, yyy := rl(lines, yy)
-	xxxx, yyyy := bt(lines, yyy)
-	r = r + x + xx + xxx + xxxx
+	xxxx, _ := bt(lines, yyy)
+	r = out + x + xx + xxx + xxxx
 
-	fmt.Println(yyyy)
+	fmt.Println(out, x, xx, xxx, xxxx)
 	return r
 }
 
 func day8Part1(input string) {
-	//<1773
+	//<1773 1700>
 	fmt.Println("Result part 1", findVisibleTrees(input))
 }
 
