@@ -26,7 +26,6 @@ func lr(input []string, hm map[string]bool) (int, map[string]bool) {
 		}
 
 	}
-	fmt.Println("LR| Found", r, "int. trees")
 	return r, hm
 }
 
@@ -51,7 +50,6 @@ func rl(input []string, hm map[string]bool) (int, map[string]bool) {
 		}
 
 	}
-	fmt.Println("RL| Found", r, "int. trees")
 	return r, hm
 }
 
@@ -72,7 +70,6 @@ func tb(input []string, hm map[string]bool) (int, map[string]bool) {
 		}
 
 	}
-	fmt.Println("TB| Found", r, "int. trees ")
 	return r, hm
 }
 
@@ -95,7 +92,6 @@ func bt(input []string, hm map[string]bool) (int, map[string]bool) {
 		}
 
 	}
-	fmt.Println("BT| Found", r, "int. trees ")
 	return r, hm
 }
 
@@ -130,24 +126,54 @@ func findVisibleTrees(input string) int {
 
 func findUp(lines []string, x int, y int) int {
 	s := lines[x][y]
-	for i := x; i > 0; i-- {
-		if lines[i][y] > s {
-			return i
+	c := 1
+	for i := x - 1; i > 0; i-- {
+		c++
+		if lines[i][y] >= s {
+			return c
 		}
 
 	}
-	return 1
+	return c
 }
 
 func findDown(lines []string, x int, y int) int {
 	s := lines[x][y]
-	for i := 0; i < len(lines); i++ {
+	c := 1
+	for i := x + 1; i < len(lines); i++ {
+		c++
 		if lines[i][y] > s {
-			return i
+			return c
 		}
 
 	}
-	return 1
+	return 0
+}
+
+func findLeft(lines []string, x int, y int) int {
+	s := lines[x][y]
+	c := 1
+	for ii := y - 1; ii > 0; ii-- {
+		c++
+		if lines[x][ii] > s {
+			return c
+		}
+
+	}
+	return c
+}
+
+func findRight(lines []string, x int, y int) int {
+	s := lines[x][y]
+	c := 1
+	for ii := y + 1; ii < len(lines[x])-1; ii++ {
+		c++
+		if lines[x][ii] > s {
+			return c
+		}
+
+	}
+	return c
 }
 
 func findBestTree(input string) int {
@@ -160,11 +186,19 @@ func findBestTree(input string) int {
 			lines = removeIndex(lines, a)
 		}
 	}
+
 	for x := 1; x < len(lines)-1; x++ {
 		for y := 1; y < len(lines[x])-1; y++ {
 			up := findUp(lines, x, y)
 			down := findDown(lines, x, y)
-			fmt.Printf("[%v %v]", up, down)
+			left := findLeft(lines, x, y)
+			right := findRight(lines, x, y)
+
+			// fmt.Printf("%v|", up)
+			tree := up * left * down * right
+			if tree > r {
+				r = tree
+			}
 		}
 	}
 
@@ -176,6 +210,7 @@ func day8Part1(input string) {
 }
 
 func day8Part2(input string) {
+	//1494080
 	fmt.Println("Result part2", findBestTree(input))
 }
 
