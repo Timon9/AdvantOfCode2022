@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/joho/godotenv"
@@ -57,9 +58,9 @@ func rl(input []string, hm map[string]bool) (int, map[string]bool) {
 func tb(input []string, hm map[string]bool) (int, map[string]bool) {
 	r := 0
 	for y := 1; y < len(input[0])-1; y++ {
-		l := input[0][y]
+		l, _ := strconv.Atoi(string(input[0][y]))
 		for x := 1; x < len(input)-1; x++ {
-			v := input[x][y]
+			v, _ := strconv.Atoi(string(input[x][y]))
 			k := fmt.Sprintf("x%vy%v", x, y)
 			if v > l {
 				l = v
