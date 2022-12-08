@@ -99,11 +99,19 @@ func bt(input []string, hm map[string]bool) (int, map[string]bool) {
 	return r, hm
 }
 
+func removeIndex(s []string, index int) []string {
+	return append(s[:index], s[index+1:]...)
+}
+
 func findVisibleTrees(input string) int {
+
 	r := 0
 	lines := strings.Split(input, "\n")
 	for a := 0; a < len(lines); a++ {
 		lines[a] = strings.TrimSpace(lines[a])
+		if len(lines[a]) < 10 {
+			lines = removeIndex(lines, a)
+		}
 	}
 
 	hm := make(map[string]bool)
