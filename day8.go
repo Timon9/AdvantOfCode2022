@@ -128,8 +128,55 @@ func findVisibleTrees(input string) int {
 	return r
 }
 
+func findUp(lines []string, x int, y int) int {
+	s := lines[x][y]
+	for i := x; i > 0; i-- {
+		if lines[i][y] > s {
+			return i
+		}
+
+	}
+	return 1
+}
+
+func findDown(lines []string, x int, y int) int {
+	s := lines[x][y]
+	for i := 0; i < len(lines); i++ {
+		if lines[i][y] > s {
+			return i
+		}
+
+	}
+	return 1
+}
+
+func findBestTree(input string) int {
+
+	r := 0
+	lines := strings.Split(input, "\n")
+	for a := 0; a < len(lines); a++ {
+		lines[a] = strings.TrimSpace(lines[a])
+		if len(lines[a]) < 10 {
+			lines = removeIndex(lines, a)
+		}
+	}
+	for x := 1; x < len(lines)-1; x++ {
+		for y := 1; y < len(lines[x])-1; y++ {
+			up := findUp(lines, x, y)
+			down := findDown(lines, x, y)
+			fmt.Printf("[%v %v]", up, down)
+		}
+	}
+
+	return r
+}
+
 func day8Part1(input string) {
 	fmt.Println("Result part 1", findVisibleTrees(input))
+}
+
+func day8Part2(input string) {
+	fmt.Println("Result part2", findBestTree(input))
 }
 
 func day8() {
@@ -139,6 +186,6 @@ func day8() {
 	fmt.Println("Day 8")
 
 	input := GetInput(8)
-	day8Part1(input)
+	day8Part2(input)
 
 }
