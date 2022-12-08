@@ -114,13 +114,13 @@ func findVisibleTrees(input string) int {
 	c := len(lines)
 	out := ((c * 2) + (len(lines[0]) * 2)) - 4
 
-	x, y := lr(lines, hm)
-	xx, yy := tb(lines, y)
-	xxx, yyy := rl(lines, yy)
-	xxxx, _ := bt(lines, yyy)
-	r = out + x + xx + xxx + xxxx
+	lr, y := lr(lines, hm)
+	tb, yy := tb(lines, y)
+	rl, yyy := rl(lines, yy)
+	bt, _ := bt(lines, yyy)
 
-	fmt.Println(out, x, xx, xxx, xxxx)
+	r = out + lr + tb + rl + bt
+
 	return r
 }
 
