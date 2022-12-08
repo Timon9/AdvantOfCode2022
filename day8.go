@@ -200,7 +200,6 @@ func findBestTree(input string) int {
 			left := findLeft(lines, x, y)
 			right := findRight(lines, x, y)
 
-			fmt.Printf("%v|", right)
 			tree := up * left * down * right
 			if tree > r {
 				r = tree
@@ -217,7 +216,6 @@ func day8Part1(input string) {
 }
 
 func day8Part2(input string) {
-	//136740< 1494080 >
 	fmt.Println("Result part2", findBestTree(input))
 }
 
