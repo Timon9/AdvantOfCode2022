@@ -31,7 +31,6 @@ func countVisitedPositions(input string) int {
 	//	var head, tail, trail Coord
 	visited := make(map[Coord]bool)
 
-	x := 0
 	// Iterate over each line in the input
 	for _, line := range strings.Split(input, "\n") {
 		var dir string
@@ -48,24 +47,16 @@ func countVisitedPositions(input string) int {
 				tail.x = trail.x
 				tail.y = trail.y
 
-			} else {
-				fmt.Println("We're still touching! head:", head, "tail:", tail, "trail", trail)
 			}
 			trail = head
 
-			fmt.Println(tail)
 			visited[tail] = true
 
-		}
-		fmt.Println("---")
-		x++
-		if x > 1 {
-			return 0
 		}
 	}
 
 	// Count the number of unique positions visited by the tail
-	count := 1
+	count := 0
 	for _, v := range visited {
 		if v {
 			count++
@@ -76,7 +67,7 @@ func countVisitedPositions(input string) int {
 }
 
 func solveDay9P1(input string) {
-	count := countVisitedPositions(input) //<45976
-	fmt.Println("countVisitedPositions:", count)
+	result := countVisitedPositions(input)
+	fmt.Println("countVisitedPositions:", result)
 
 }
