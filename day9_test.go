@@ -16,6 +16,6 @@ D 1
 L 5
 R 2`
 
-	result := countVisitedPositions(input)
+	result := countVisitedPositions(input, 0)
 	fmt.Println("Result:", result) // Expected output: 13
 }
