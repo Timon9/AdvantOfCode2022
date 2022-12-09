@@ -44,6 +44,8 @@ func countVisitedPositions(input string) int {
 			head.move(dir)
 			/**
 			Tail trails Head by 1, X/Y or Diagional
+
+			!! Remember previous touch point and move over that point
 			*/
 			if tail.x < (head.x - 1) { // Move right
 				tail.x++
