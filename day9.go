@@ -2,21 +2,24 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/joho/godotenv"
 )
 
 func day9Part1(input string) {
-	fmt.Println("Result part 1", findVisibleTrees(input))
 }
 
 func day9Part2(input string) {
-	fmt.Println("Result part2", findBestTree(input))
 }
+
 func printRightNumberLeftLetter(input string) {
 	// Split input string into lines
 	lines := strings.Split(input, "\n")
+
+	headX := 0
+	headY := 0
 
 	for _, line := range lines {
 		// Trim leading and trailing whitespace from line
@@ -26,19 +29,20 @@ func printRightNumberLeftLetter(input string) {
 		words := strings.Split(line, " ")
 
 		// Get the right number and left letter
-		rightNumber := words[len(words)-1]
+		rightNumber, _ := strconv.Atoi(string(words[len(words)-1]))
 		leftLetter := words[0]
 
 		switch string(leftLetter) {
 		case "U":
-			fmt.Println("UP^", rightNumber)
+			headY = headY - rightNumber
 		case "D":
-			fmt.Println("DOWN_", rightNumber)
+			headY = headY + rightNumber
 		case "L":
-			fmt.Println("<LEFT", rightNumber)
+			headX = headX - rightNumber
 		case "R":
-			fmt.Println("RIGHT^", rightNumber)
+			headX = headX + rightNumber
 		}
+		fmt.Println("HEAD x", headX, "y", headY)
 	}
 }
 
