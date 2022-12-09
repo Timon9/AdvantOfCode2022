@@ -26,7 +26,6 @@ func (c *Coord) move(dir string) {
 // countVisitedPositions counts the number of unique positions visited by the tail
 // given a string of directions and steps
 func countVisitedPositions(input string) int {
-	fmt.Println("Input:", input)
 
 	var head, tail Coord
 	visited := make(map[Coord]bool)
@@ -75,7 +74,7 @@ func countVisitedPositions(input string) int {
 		}
 	}
 
-	return count - 1
+	return count
 }
 
 func solveDay9P1(input string) {
