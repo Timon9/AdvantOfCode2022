@@ -19,6 +19,7 @@ func printRightNumberLeftLetter(input string) {
 	lines := strings.Split(input, "\n")
 
 	headX := 0
+	tailX := 0
 	headY := 0
 
 	for _, line := range lines {
@@ -42,7 +43,18 @@ func printRightNumberLeftLetter(input string) {
 		case "R":
 			headX = headX + rightNumber
 		}
-		fmt.Println("HEAD x", headX, "y", headY)
+
+		tailToRight := (headX - tailX) - 1
+		tailToLeft := (tailX - headX) - 1
+		if tailToRight > 0 {
+			fmt.Println("tailToRight", tailToRight)
+			tailX = headX - 1
+		}
+		if tailToLeft > 0 {
+			fmt.Println("tailToLeft", tailToLeft)
+			tailX = headX + 1
+		}
+
 	}
 }
 
