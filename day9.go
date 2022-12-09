@@ -59,21 +59,6 @@ func countVisitedPositions(input string) int {
 			}
 			fmt.Println(tail)
 
-			// // If the head is not adjacent to the tail, move the tail to the
-			// // same position as the head and mark the position as visited
-			// for i := tail.x; i < head.x-2; i++ {
-			// 	visited[Coord{x: i, y: head.y}] = true
-			// }
-			// for i := head.x; i < tail.x-2; i++ {
-			// 	visited[Coord{x: i, y: head.y}] = true
-			// }
-			// for i := tail.y; i < head.y-2; i++ {
-			// 	visited[Coord{x: head.x, y: i}] = true
-			// }
-			// for i := head.y; i < tail.y-2; i++ {
-			// 	visited[Coord{x: head.x, y: i}] = true
-			// }
-
 		}
 		fmt.Println("------")
 
