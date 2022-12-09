@@ -42,29 +42,21 @@ func countVisitedPositions(input string) int {
 		for i := 0; i < steps; i++ {
 			head.move(dir)
 
-			xdif := head.x - tail.x
-			ydif := head.y - tail.y
 			// If the head is not adjacent to the tail, move the tail to the
 			// same position as the head and mark the position as visited
-			if (xdif > 1 || xdif < -1) || (ydif > 1 || ydif < -1) {
-				if head.x > tail.x+1 {
-					for i := tail.x + 1; i < head.x-1; i++ {
-						visited[Coord{x: i, y: head.y}] = true
-					}
-				} else if head.x < tail.x-1 {
-					for i := head.x + 1; i < tail.x-1; i++ {
-						visited[Coord{x: i, y: head.y}] = true
-					}
-				} else if head.y > tail.y+1 {
-					for i := tail.y + 1; i < head.y-1; i++ {
-						visited[Coord{x: head.x, y: i}] = true
-					}
-				} else if head.y < tail.y-1 {
-					for i := head.y + 1; i < tail.y-1; i++ {
-						visited[Coord{x: head.x, y: i}] = true
-					}
-				}
+			for i := tail.x + 1; i < head.x-1; i++ {
+				visited[Coord{x: i, y: head.y}] = true
 			}
+			for i := head.x + 1; i < tail.x-1; i++ {
+				visited[Coord{x: i, y: head.y}] = true
+			}
+			for i := tail.y + 1; i < head.y-1; i++ {
+				visited[Coord{x: head.x, y: i}] = true
+			}
+			for i := head.y + 1; i < tail.y-1; i++ {
+				visited[Coord{x: head.x, y: i}] = true
+			}
+
 		}
 	}
 
