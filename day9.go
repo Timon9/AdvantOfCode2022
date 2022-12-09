@@ -51,10 +51,11 @@ func countVisitedPositions(input string) int {
 				tail.x--
 			}
 
-			if tail.y < (head.y + 1) { // Move up
-				tail.y--
-			} else if tail.y > (head.y - 1) { // Move down
+			if tail.y < (head.y - 1) {
 				tail.y++
+			}
+			if tail.y > (head.y + 1) {
+				tail.y--
 			}
 
 			fmt.Println(tail)
