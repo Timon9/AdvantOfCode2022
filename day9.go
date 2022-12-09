@@ -30,6 +30,7 @@ func countVisitedPositions(input string, extraKnots int) int {
 	var head, tail, trail Coord
 	//	var head, tail, trail Coord
 	visited := make(map[Coord]bool)
+	last := []Coord{}
 
 	// Iterate over each line in the input
 	for _, line := range strings.Split(input, "\n") {
@@ -46,12 +47,22 @@ func countVisitedPositions(input string, extraKnots int) int {
 			if tail.x < (head.x-1) || tail.x > (head.x+1) || tail.y < (head.y-1) || tail.y > (head.y+1) {
 				tail.x = trail.x
 				tail.y = trail.y
-
 			}
 			trail = head
 
-			visited[tail] = true
+			if !visited[tail] {
+				visited[tail] = true
+				last = append(last, tail)
+			}
+		}
+	}
 
+	jc := 0
+	for j := len(last) - 1; j > 0 && jc < 10; j-- {
+		jc++
+		if visited[last[j]] {
+			fmt.Println(jc, "Deleting", last[j])
+			delete(visited, last[j])
 		}
 	}
 
