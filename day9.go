@@ -43,6 +43,9 @@ func countVisitedPositions(input string) int {
 		for i := 0; i < steps; i++ {
 			head.move(dir)
 		}
+		/**
+		Tail trails Head by 1, X/Y or Diagional
+		*/
 		// tail.x = head.x - 1
 		// tail.y = head.y
 		x++
