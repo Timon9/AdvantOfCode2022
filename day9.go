@@ -27,7 +27,7 @@ func (c *Coord) move(dir string) {
 // given a string of directions and steps
 func countVisitedPositions(input string) int {
 
-	var head, tail Coord
+	var head, tail, trail Coord
 	visited := make(map[Coord]bool)
 
 	x := 0
@@ -55,8 +55,7 @@ func countVisitedPositions(input string) int {
 
 			if tail.y < (head.y - 1) {
 				tail.y++
-			}
-			if tail.y > (head.y + 1) {
+			} else if tail.y > (head.y + 1) {
 				tail.y--
 			}
 
