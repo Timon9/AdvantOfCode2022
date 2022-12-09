@@ -41,6 +41,11 @@ func countVisitedPositions(input string) int {
 		// Move the head the given number of steps
 		for i := 0; i < steps; i++ {
 			head.move(dir)
+
+			//Corners: check steps to know if you need to corner
+			// if head.x > (tail.x + 1) {
+			// }
+
 			//X
 			if head.x > (tail.x + 1) {
 				visited[Coord{x: (tail.x + 1), y: tail.y}] = true
