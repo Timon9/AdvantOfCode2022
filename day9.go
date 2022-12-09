@@ -23,6 +23,13 @@ func (c *Coord) move(dir string) {
 	}
 }
 
+func (t *Coord) follow(h Coord, trail Coord) {
+	if t.x < (h.x-1) || t.x > (h.x+1) || t.y < (h.y-1) || t.y > (h.y+1) {
+		t.x = trail.x
+		t.y = trail.y
+	}
+}
+
 // countVisitedPositions counts the number of unique positions visited by the tail
 // given a string of directions and steps
 func countVisitedPositions(input string, extraKnots int) int {
@@ -42,11 +49,7 @@ func countVisitedPositions(input string, extraKnots int) int {
 		// Move the head the given number of steps
 		for i := 0; i < steps; i++ {
 			head.move(dir)
-
-			if tail.x < (head.x-1) || tail.x > (head.x+1) || tail.y < (head.y-1) || tail.y > (head.y+1) {
-				tail.x = trail.x
-				tail.y = trail.y
-			}
+			tail.follow(head, trail)
 			trail = head
 
 			if !visited[tail] {
