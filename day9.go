@@ -17,15 +17,17 @@ func (c *Coord) move(dir string) {
 	case "L":
 		c.x--
 	case "U":
-		c.y++
-	case "D":
 		c.y--
+	case "D":
+		c.y++
 	}
 }
 
 // countVisitedPositions counts the number of unique positions visited by the tail
 // given a string of directions and steps
 func countVisitedPositions(input string) int {
+	fmt.Println("Input:", input)
+
 	var head, tail Coord
 	visited := make(map[Coord]bool)
 
@@ -44,8 +46,23 @@ func countVisitedPositions(input string) int {
 			// If the head is not adjacent to the tail, move the tail to the
 			// same position as the head and mark the position as visited
 			if head.x != tail.x && head.y != tail.y {
-				tail = head
-				visited[tail] = true
+				if head.x > tail.x {
+					for i := tail.x + 1; i < head.x; i++ {
+						visited[Coord{x: i, y: head.y}] = true
+					}
+				} else if head.x < tail.x {
+					for i := head.x + 1; i < tail.x; i++ {
+						visited[Coord{x: i, y: head.y}] = true
+					}
+				} else if head.y > tail.y {
+					for i := tail.y + 1; i < head.y; i++ {
+						visited[Coord{x: head.x, y: i}] = true
+					}
+				} else if head.y < tail.y {
+					for i := head.y + 1; i < tail.y; i++ {
+						visited[Coord{x: head.x, y: i}] = true
+					}
+				}
 			}
 		}
 	}
@@ -58,7 +75,7 @@ func countVisitedPositions(input string) int {
 		}
 	}
 
-	return count
+	return count - 1
 }
 
 func solveDay9P1(input string) {
