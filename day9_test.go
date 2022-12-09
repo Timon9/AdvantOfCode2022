@@ -13,5 +13,5 @@ R 4
 D 1 
 L 5 
 R 2 `
-	printRightNumberLeftLetter(input)
+	solveDay9P1(input)
 }

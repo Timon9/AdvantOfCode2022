@@ -2,69 +2,67 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
-
-	"github.com/joho/godotenv"
 )
 
-func day9Part1(input string) {
+// Coord is a coordinate
+type Coord struct {
+	x, y int
 }
 
-func day9Part2(input string) {
-}
-
-func printRightNumberLeftLetter(input string) {
-	// Split input string into lines
-	lines := strings.Split(input, "\n")
-
-	headX := 0
-	tailX := 0
-	headY := 0
-
-	for _, line := range lines {
-		// Trim leading and trailing whitespace from line
-		line = strings.TrimSpace(line)
-
-		// Split line into words
-		words := strings.Split(line, " ")
-
-		// Get the right number and left letter
-		rightNumber, _ := strconv.Atoi(string(words[len(words)-1]))
-		leftLetter := words[0]
-
-		switch string(leftLetter) {
-		case "U":
-			headY = headY - rightNumber
-		case "D":
-			headY = headY + rightNumber
-		case "L":
-			headX = headX - rightNumber
-		case "R":
-			headX = headX + rightNumber
-		}
-
-		tailToRight := (headX - tailX) - 1
-		tailToLeft := (tailX - headX) - 1
-		if tailToRight > 0 {
-			fmt.Println("tailToRight", tailToRight)
-			tailX = headX - 1
-		}
-		if tailToLeft > 0 {
-			fmt.Println("tailToLeft", tailToLeft)
-			tailX = headX + 1
-		}
-
+func (c *Coord) move(dir string) {
+	switch dir {
+	case "R":
+		c.x++
+	case "L":
+		c.x--
+	case "U":
+		c.y++
+	case "D":
+		c.y--
 	}
 }
 
-func day9() {
+// countVisitedPositions counts the number of unique positions visited by the tail
+// given a string of directions and steps
+func countVisitedPositions(input string) int {
+	var head, tail Coord
+	visited := make(map[Coord]bool)
 
-	godotenv.Read(".env")
+	// Iterate over each line in the input
+	for _, line := range strings.Split(input, "\n") {
+		var dir string
+		var steps int
 
-	fmt.Println("Day 9")
+		// Parse the direction and number of steps
+		fmt.Sscanf(line, "%1s%d", &dir, &steps)
 
-	input := GetInput(9)
-	day9Part2(input)
+		// Move the head the given number of steps
+		for i := 0; i < steps; i++ {
+			head.move(dir)
+
+			// If the head is not adjacent to the tail, move the tail to the
+			// same position as the head and mark the position as visited
+			if head.x != tail.x && head.y != tail.y {
+				tail = head
+				visited[tail] = true
+			}
+		}
+	}
+
+	// Count the number of unique positions visited by the tail
+	count := 0
+	for _, v := range visited {
+		if v {
+			count++
+		}
+	}
+
+	return count
+}
+
+func solveDay9P1(input string) {
+	count := countVisitedPositions(input)
+	fmt.Println("countVisitedPositions:", count)
 
 }

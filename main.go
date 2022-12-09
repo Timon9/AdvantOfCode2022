@@ -44,6 +44,6 @@ func main() {
 
 	fmt.Println("AdvantOfCode")
 
-	day9()
+	solveDay9P1(GetInput(9))
 
 }
