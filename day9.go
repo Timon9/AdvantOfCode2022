@@ -59,15 +59,7 @@ func countVisitedPositions(input string, extraKnots int) int {
 		}
 	}
 
-	// Count the number of unique positions visited by the tail
-	count := 0
-	for _, v := range visited {
-		if v {
-			count++
-		}
-	}
-
-	return count
+	return len(visited)
 }
 
 func solveDay9P1(input string) {
