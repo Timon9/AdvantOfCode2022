@@ -45,10 +45,23 @@ func countVisitedPositions(input string) int {
 			/**
 			Tail trails Head by 1, X/Y or Diagional
 			*/
-			// tail.x = head.x - 1
-			// tail.y = head.y
+			if tail.x < (head.x - 1) { // Move right
+				tail.x++
+			} else if tail.x > (head.x + 1) { // Move left
+				tail.x--
+			}
+
+			if tail.y < (head.y + 1) { // Move up
+				tail.y--
+			} else if tail.y > (head.y - 1) { // Move down
+				tail.y++
+			}
+
+			fmt.Println(tail)
+			visited[tail] = true
 
 		}
+		fmt.Println("---")
 		x++
 		if x > 1 {
 			return 0
