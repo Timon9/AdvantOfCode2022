@@ -34,7 +34,9 @@ func (t *Coord) follow(h Coord, trail Coord) {
 // given a string of directions and steps
 func countVisitedPositions(input string, extraKnots int) int {
 
-	var head, tail, trail Coord
+	var head Coord
+	tail := [10]Coord{}
+	trail := [10]Coord{}
 	//	var head, tail, trail Coord
 	visited := make(map[Coord]bool)
 
@@ -49,12 +51,17 @@ func countVisitedPositions(input string, extraKnots int) int {
 		// Move the head the given number of steps
 		for i := 0; i < steps; i++ {
 			head.move(dir)
-			tail.follow(head, trail)
-			trail = head
-
-			if !visited[tail] {
-				visited[tail] = true
+			for j := 0; j <= 9; j++ {
+				if j == 0 {
+					tail[0].follow(head, trail[0])
+					trail[0] = head
+				} else {
+					tail[j].follow(tail[j-1], trail[j])
+					trail[j] = trail[j-1]
+					visited[tail[9]] = true
+				}
 			}
+
 		}
 	}
 

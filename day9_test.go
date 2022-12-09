@@ -7,15 +7,15 @@ import (
 
 func TestDay9P1(t *testing.T) {
 
-	//	input := `R 5
-	//
-	// U 8
-	// L 8
-	// D 3
-	// R 17
-	// D 10
-	// L 25
-	// U 20`
+	input2 := `R 5
+U 8
+L 8
+D 3
+R 17
+D 10
+L 25
+U 20`
+
 	input := `R 4
 U 4
 L 3
@@ -26,4 +26,6 @@ L 5
 R 2`
 	result := countVisitedPositions(input, 0)
 	fmt.Println("Result:", result) // Expected output: 36
+	result2 := countVisitedPositions(input2, 0)
+	fmt.Println("Result2:", result2) // Expected output: 36
 }
