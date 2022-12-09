@@ -58,7 +58,7 @@ func countVisitedPositions(input string, extraKnots int) int {
 	}
 
 	jc := 0
-	for j := len(last) - 1; j > 0 && jc < 10; j-- {
+	for j := len(last) - 1; j > 0 && jc <= 10; j-- {
 		jc++
 		if visited[last[j]] {
 			fmt.Println(jc, "Deleting", last[j])
