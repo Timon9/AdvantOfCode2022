@@ -28,6 +28,7 @@ func (c *Coord) move(dir string) {
 func countVisitedPositions(input string) int {
 
 	var head, tail, trail Coord
+	//	var head, tail, trail Coord
 	visited := make(map[Coord]bool)
 
 	x := 0
@@ -42,22 +43,15 @@ func countVisitedPositions(input string) int {
 		// Move the head the given number of steps
 		for i := 0; i < steps; i++ {
 			head.move(dir)
-			/**
-			Tail trails Head by 1, X/Y or Diagional
 
-			!! Remember previous touch point and move over that point
-			*/
-			if tail.x < (head.x - 1) { // Move right
-				tail.x++
-			} else if tail.x > (head.x + 1) { // Move left
-				tail.x--
-			}
+			if tail.x < (head.x-1) || tail.x > (head.x+1) || tail.y < (head.y-1) || tail.y > (head.y+1) {
+				tail.x = trail.x
+				tail.y = trail.y
 
-			if tail.y < (head.y - 1) {
-				tail.y++
-			} else if tail.y > (head.y + 1) {
-				tail.y--
+			} else {
+				fmt.Println("We're still touching! head:", head, "tail:", tail, "trail", trail)
 			}
+			trail = head
 
 			fmt.Println(tail)
 			visited[tail] = true
