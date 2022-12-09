@@ -41,23 +41,42 @@ func countVisitedPositions(input string) int {
 		// Move the head the given number of steps
 		for i := 0; i < steps; i++ {
 			head.move(dir)
+			//X
+			if head.x > (tail.x + 1) {
+				visited[Coord{x: (tail.x + 1), y: tail.y}] = true
+				tail.x = tail.x + 1
+			} else if head.x < (tail.x - 1) {
+				visited[Coord{x: (tail.x - 1), y: tail.y}] = true
+				tail.x = tail.x - 1
+			}
+			//Y
+			if head.y > (tail.y + 1) {
+				visited[Coord{x: tail.x, y: (tail.y + 1)}] = true
+				tail.y = tail.y + 1
+			} else if head.y < (tail.y - 1) {
+				visited[Coord{x: tail.x, y: (tail.y - 1)}] = true
+				tail.y = tail.y - 1
+			}
+			fmt.Println(tail)
 
-			// If the head is not adjacent to the tail, move the tail to the
-			// same position as the head and mark the position as visited
-			for i := tail.x + 1; i < head.x-1; i++ {
-				visited[Coord{x: i, y: head.y}] = true
-			}
-			for i := head.x + 1; i < tail.x-1; i++ {
-				visited[Coord{x: i, y: head.y}] = true
-			}
-			for i := tail.y + 1; i < head.y-1; i++ {
-				visited[Coord{x: head.x, y: i}] = true
-			}
-			for i := head.y + 1; i < tail.y-1; i++ {
-				visited[Coord{x: head.x, y: i}] = true
-			}
+			// // If the head is not adjacent to the tail, move the tail to the
+			// // same position as the head and mark the position as visited
+			// for i := tail.x; i < head.x-2; i++ {
+			// 	visited[Coord{x: i, y: head.y}] = true
+			// }
+			// for i := head.x; i < tail.x-2; i++ {
+			// 	visited[Coord{x: i, y: head.y}] = true
+			// }
+			// for i := tail.y; i < head.y-2; i++ {
+			// 	visited[Coord{x: head.x, y: i}] = true
+			// }
+			// for i := head.y; i < tail.y-2; i++ {
+			// 	visited[Coord{x: head.x, y: i}] = true
+			// }
 
 		}
+		fmt.Println("------")
+
 	}
 
 	// Count the number of unique positions visited by the tail
