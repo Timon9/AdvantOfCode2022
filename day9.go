@@ -54,7 +54,7 @@ func countVisitedPositions(input string, extraKnots int) int {
 			tail[0].follow(head, trail[0])
 			trail[0] = head
 			//
-			visited[tail[9]] = true
+			visited[tail[0]] = true
 
 		}
 	}
